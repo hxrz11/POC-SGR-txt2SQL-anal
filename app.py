@@ -486,4 +486,6 @@ def summary():
     return render_template_string(BASE_HTML, body=body)
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    debug = (os.getenv("FLASK_DEBUG", "true").lower() in {"1", "true", "yes", "on"})
+    port = int(os.getenv("PORT", "5001"))
+    app.run(host="0.0.0.0", port=port, debug=debug)
